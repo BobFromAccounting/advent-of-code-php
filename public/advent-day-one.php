@@ -18,10 +18,9 @@
         $inputs[$i] = $contents[$i];
     }
 
-    foreach ($inputs as $key => $input) {
+    foreach($inputs as $key => $input) {
         if ($endingFloor === -1) {
             echo $key . PHP_EOL;
-            die();
         }
 
         if ($input === "(") {
