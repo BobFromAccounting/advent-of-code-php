@@ -24,6 +24,8 @@
 
     $totalWrappingPaperInSquareFeet = parseDimensions($dimensions, $measurements);
 
+    $totalRibbonInCubicFeet = parseDimensionsForRibbon($dimensions, $measurements);
+
     function getSurfaceArea($length, $width, $height)
     {
         $surfaceArea = (
@@ -31,6 +33,7 @@
                 + (2 * ($width * $height))
                 + (2 * ($length * $height))
         );
+
         return $surfaceArea; 
     }
 
@@ -54,6 +57,28 @@
         return explode(PHP_EOL, $contents);
     }
 
+    function getPerimeter($length, $width, $height)
+    {
+        $zAxisByXAxis = $length * $width;
+        $xAxisByYAxis = $width * $height;
+        $zAxisByYAxis = $length * $height;
+
+        if ($zAxisByXAxis < $xAxisByYAxis && $zAxisByXAxis < $zAxisByYAxis) {
+            $perimeter = ((2 * $length) + (2 * $width));
+        } elseif ($xAxisByYAxis < $zAxisByYAxis) {
+            $perimeter = ((2 * $width) + (2 * $height));
+        } else {
+            $perimeter = ((2 * $length) + (2 * $height));
+        }
+
+        return $perimeter;
+    }
+
+    function getLengthOfRibbonForBow($length, $width, $height)
+    {
+        return $length * $width * $height;
+    }
+
     function parseDimensions($dimensions, $measurements)
     {
         foreach ($measurements as $measurement) {
@@ -73,6 +98,28 @@
         return $total;
     }
 
+    function parseDimensionsForRibbon($dimensions, $measurements)
+    {
+        foreach ($measurements as $measurement) {
+            $dimensions = explode("x", $measurement);
+
+            $length = $dimensions[0];
+            $width  = $dimensions[1];
+            $height = $dimensions[2];
+
+            $perimeter = getPerimeter($length, $width, $height);
+
+            $bowLength = getLengthOfRibbonForBow($length, $width, $height);
+
+            $total += ($perimeter + $bowLength);
+        }
+
+        return $total;
+    }
+
+
     echo $totalWrappingPaperInSquareFeet . PHP_EOL;
+
+    echo $totalRibbonInCubicFeet . PHP_EOL;
 
 ?>
