@@ -63,7 +63,7 @@
         $xAxisByYAxis = $width * $height;
         $zAxisByYAxis = $length * $height;
 
-        if ($zAxisByXAxis < $xAxisByYAxis && $zAxisByXAxis < $zAxisByYAxis) {
+        if ($zAxisByXAxis < $xAxisByYAxis &&$zAxisByXAxis < $zAxisByYAxis) {
             $perimeter = ((2 * $length) + (2 * $width));
         } elseif ($xAxisByYAxis < $zAxisByYAxis) {
             $perimeter = ((2 * $width) + (2 * $height));
